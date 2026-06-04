@@ -1,0 +1,4 @@
+stops.json
+{"id": "1234", "name": "O'Connell St", "lat": 53.3498, "lon": -6.2603}
+{"id": "5678", "name": "UCD N11", "lat": 53.3080, "lon": -6.2239},
+{"id": "9012", "name": "Blanchardstown SC", "lat": 53.3905, "lon": -6.3870} ]
