@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const weatherResponse = await fetch("http://localhost:5000/weather/sample");
+      const weatherResponse = await fetch("http://localhost:5000/weather/dublin")
       const weatherData = await weatherResponse.json();
       setWeather(weatherData);
 
