@@ -22,18 +22,27 @@ export default function Home() {
     fetchData();
   }, []);
 
-  async function saveTestRecord() {
-    await addDoc(collection(db, "weather_records"), {
-      source: weather?.source || "Met Eireann",
-      location: weather?.location || "Dublin",
-      rainfall_mm: weather?.rainfall_mm || 0,
-      rain_bin: weather?.rain_bin || "unknown",
-      gtfs_entities: gtfs?.entities || 0,
-      created_at: new Date().toISOString()
-    });
+ async function saveTestRecord() {
+  await addDoc(collection(db, "rainfall_delay_snapshots"), {
+    source_weather: weather?.source || "Met Eireann",
+    source_transport: "NTA GTFS-Realtime",
+    location: weather?.location || "Dublin",
+    rainfall_mm: weather?.rainfall_mm || 0,
+    rain_bin: weather?.rain_bin || "unknown",
+    forecast_time: weather?.forecast_time || null,
 
-    alert("Weather + GTFS record saved to Firebase");
-  }
+    gtfs_entities: gtfs?.entities || 0,
+
+    average_delay_minutes: gtfs?.average_delay_minutes || 0,
+    average_delay_seconds: gtfs?.average_delay_seconds || 0,
+    delayed_trips: gtfs?.delayed_trips || 0,
+    delay_samples: gtfs?.delay_samples || 0,
+
+    saved_at: new Date().toISOString()
+  });
+
+  alert("Full rainfall + GTFS snapshot saved to Firebase");
+}
 
   return (
     <main className="page">
@@ -84,7 +93,7 @@ export default function Home() {
       </section>
 
       <button className="saveButton" onClick={saveTestRecord}>
-        Save Weather + GTFS Record to Firebase
+        Save Full Rainfall + GTFS Snapshot
       </button>
     </main>
   );
